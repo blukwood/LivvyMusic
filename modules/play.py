@@ -549,6 +549,7 @@ async def deezer(client: Client, message_: Message):
         que[chat_id] = []
         qeue = que.get(chat_id)
         s_name = title
+        nd = round(duration / 60)
         r_by = message_.from_user
         loc = file_path
         appendable = [s_name, r_by, loc]
@@ -565,7 +566,7 @@ async def deezer(client: Client, message_: Message):
         chat_id=message_.chat.id,
         reply_markup=keyboard,
         photo="final.png",
-        caption=f"🏷ɴᴀᴍᴇ : [{title[:45]}]({url})\n⏱ᴅᴜʀᴀᴛɪᴏɴ : `{duration}`\n🎧ʀᴇQᴜᴇꜱᴛ ʙʏ : {r_by.first_name}\n\n𝗡𝗼𝘄 𝗣𝗹𝗮𝘆𝗶𝗻𝗴",
+        caption=f"🏷ɴᴀᴍᴇ : [{title[:45]}]({url})\n⏱ᴅᴜʀᴀᴛɪᴏɴ : `{nd}`\n🎧ʀᴇQᴜᴇꜱᴛ ʙʏ : {r_by.first_name}\n\n𝗡𝗼𝘄 𝗣𝗹𝗮𝘆𝗶𝗻𝗴",
     )
     os.remove("final.png")
 
@@ -691,6 +692,7 @@ async def jiosaavn(client: Client, message_: Message):
         que[chat_id] = []
         qeue = que.get(chat_id)
         s_name = sname
+        ndd = round(sduration / 60)
         r_by = message_.from_user
         loc = file_path
         appendable = [s_name, r_by, loc]
@@ -706,7 +708,7 @@ async def jiosaavn(client: Client, message_: Message):
         chat_id=message_.chat.id,
         reply_markup=keyboard,
         photo="final.png",
-        caption=f"🏷ɴᴀᴍᴇ : {sname[:45]}\n⏱ᴅᴜʀᴀᴛɪᴏɴ : `{sduration}`\n🎧ʀᴇQᴜᴇꜱᴛ ʙʏ : {r_by.first_name}\n\n𝗡𝗼𝘄 𝗣𝗹𝗮𝘆𝗶𝗻𝗴",
+        caption=f"🏷ɴᴀᴍᴇ : {sname[:45]}\n⏱ᴅᴜʀᴀᴛɪᴏɴ : `{ndd}`\n🎧ʀᴇQᴜᴇꜱᴛ ʙʏ : {r_by.first_name}\n\n𝗡𝗼𝘄 𝗣𝗹𝗮𝘆𝗶𝗻𝗴",
     )
     os.remove("final.png")
 
