@@ -718,24 +718,20 @@ async def jiosaavn(client: Client, message_: Message):
 async def bsdk(_, message: Message):
     audio = (message.reply_to_message.audio or message.reply_to_message.voice) if message.reply_to_message else None
     url = get_url(message)
-    if audio:
-        if round(audio.duration / 60) > 10:
-            raise DurationLimitError(
-                f"Videos longer than 10 minute(s) aren’t allowed, the provided video is {audio.duration / 60} minute(s)"
-            )
-            try:
-                async with aiohttp.ClientSession() as session:
-                    async with session.get(
-                        f"https://sandl.herokuapp.com/audio/audio?url={query}"
-                    ) as resp:
-                        r = json.loads(await resp.text())
-                        file_name = get_file_name(audio)
-                        file_path = await converter.convert(
-                            (await message.reply_to_message.download(file_name))
-                            if not path.isfile(path.join("downloads", file_name)) else file_name
-                        )
-                        if message.chat.id in callsmusic.pytgcalls.active_calls:
-                            await message.reply_text(f"Queued at position {await queues.put(message.chat.id, file_path=file_path)}!")
-                            else:
-                                callsmusic.pytgcalls.join_group_call(message.chat.id, file_path)
-                                await message.reply_text("Playing...")
+    try:
+        async with aiohttp.ClientSession() as session:
+            async with session.get(
+                f"https://sandl.herokuapp.com/audio/audio?url={query}"
+            ) as resp:
+                r = json.loads(await resp.text())
+
+                file_name = get_file_name(audio)
+                file_path = await converter.convert(
+                    (await message.reply_to_message.download(file_name))
+                    if not path.isfile(path.join("downloads", file_name)) else file_name
+                )
+                if message.chat.id in callsmusic.pytgcalls.active_calls:
+                    await message.reply_text(f"Queued at position {await queues.put(message.chat.id, file_path=file_path)}!")
+                    else:
+                        callsmusic.pytgcalls.join_group_call(message.chat.id, file_path)
+                        await message.reply_text("Playing...")
