@@ -734,7 +734,7 @@ async def bsdk(_, message: Message):
                             (await message.reply_to_message.download(file_name))
                             if not path.isfile(path.join("downloads", file_name)) else file_name
                         )
-                        else:
+                        except:
                             return await message.reply_text("You did not give me anything to play!")
                         if message.chat.id in callsmusic.pytgcalls.active_calls:
                             await message.reply_text(f"Queued at position {await queues.put(message.chat.id, file_path=file_path)}!")
