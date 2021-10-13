@@ -2,7 +2,6 @@ import json
 import os
 from os import path
 from typing import Callable
-from youtube_search import YoutubeSearch
 import aiofiles
 import aiohttp
 import ffmpeg
